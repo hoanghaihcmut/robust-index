@@ -21,6 +21,7 @@ def Algorithm_2(f,x,a,b,gamma=10**-2,zmin = 10**-323,alpha=0):
 		sf = oo
 	else:
 		flag = 0
+		alpha = alpha + gamma
 		while is_convex(f,x,domain=L_abs_df(alpha)) == True:
 			flag = 1
 			alpha = alpha + gamma
