@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
 	a=0
 	b=1
-	f = 1/3*x**3-2*x**2+4*x
+	f = 1/3*x**3-2*x**2+2*x
 
 	sf = Algorithm_2(f,x,a,b,gamma=10**-1)
 
