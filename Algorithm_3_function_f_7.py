@@ -65,7 +65,7 @@ for seg in SEGs:
 
 	g = f.subs([(x,xt),(y,yt)])
 
-	sg = Algorithm_1(g,t,a,b)
+	sg = algorithm_2(g,t,a,b)
 	S_m = S_m + [sg]
 	if sg<0:
 		break
