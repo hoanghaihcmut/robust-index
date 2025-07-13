@@ -1,7 +1,8 @@
 # On the Robustness of Quasiconvex Functions
 
-**N.N. Hai**<sup>2,3</sup>, **P.T. An**<sup>1,3\*</sup> ([ORCID: 0000-0002-1903-3510](https://orcid.org/0000-0002-1903-3510)), **N.H. Hai**<sup>1,3</sup>
-✉ *Corresponding author*: [thanhan@hcmut.edu.vn](mailto:thanhan@hcmut.edu.vn)
+**N.N. Hai**<sup>2,3</sup>, **P.T. An**<sup>1,3\*</sup>, **N.H. Hai**<sup>1,3</sup>
+
+✉ *Corresponding author*: [thanhan@hcmut.edu.vn](mailto:thanhan@hcmut.edu.vn), [ORCID: 0000-0002-1903-3510](https://orcid.org/0000-0002-1903-3510)
 
 📄 **DOI:** [10.1016/j.cam.2025.116906](https://doi.org/10.1016/j.cam.2025.116906)
 
