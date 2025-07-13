@@ -1,8 +1,8 @@
-# Computing the Robust Indices of Quasiconvex Functions
+# On the robustness of quasiconvex functions
 N.N. Hai, P.T. An and N.H. Hai
 
 ## Abstract:
-A real function defined on a nonempty and convex $\mathcal{D}\subset\mathbb{R}^n$, which remains quasiconvex under small linear perturbations, is robustly quasiconvex. The supremum of norms of these linear perturbations is said to be the robust index of the function. In this article, we present the relationships between the robust index of a quasiconvex function on $\mathcal{D}$ and its robust index on line segments contained in $\mathcal{D}$. The closure of the set of linear perturbations above is proved. Additionally, approximation algorithms for computing the robust index of quasiconvex functions on a compact and convex set $\mathcal{D}\subset\mathbb{R}^n$ are presented. Some examples of computing the robust index of some quasiconvex functions are shown.
+A robustly quasiconvex function on a nonempty convex subset $\mathcal{D}$ of $\mathbb{R}^n$ is a quasiconvex function that remains quasiconvex under small linear perturbations on $\mathcal{D}$. The robustness index of the function on $\mathcal{D}$ is defined as the supremum of norms of these linear perturbations. In this article, we prove the set of the above linear perturbations is closed. Some algorithms for approximating the computation of the robustness index of quasiconvex functions on a subset $\mathcal{D}$ of $\mathbb{R}^n$ are presented, where $\mathcal{D}$ is nonempty, convex, and compact. Moreover, some numerical examples of finding the robustness index for some quasiconvex functions and an application of the robustness index in healthcare are given.
 
 ## Implementation:
 We implement the algorithms to compute the robust index for some quasiconvex functions.
