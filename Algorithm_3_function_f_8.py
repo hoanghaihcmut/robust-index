@@ -65,7 +65,7 @@ for i in range(len(partial_D_m)):
         zt = u[2] + t*(v[2]-u[2])/uv
         g = f.subs([(x,xt),(y,yt),(z,zt)])
 
-        s_g = algorithm_1(g,t,0,uv)
+        s_g = algorithm_2(g,t,0,uv)
         S_m = S_m+[s_g]
         
         ax.plot([u[0], v[0]], [u[1], v[1]], [u[2], v[2]], c='b',linewidth=0.5)
