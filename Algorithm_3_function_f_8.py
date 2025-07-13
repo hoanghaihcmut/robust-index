@@ -1,10 +1,11 @@
 """
-This code is copyrighted by Institute of Mathematical and Computational Sciences - IMACS, 
-    Ho Chi Minh City University of Technology (HCMUT).  
-Contact: Prof. Phan Thanh An thanhan@hcmut.edu.vn
-"""
+Copyright © Institute of Mathematical and Computational Sciences (IMACS),
+Ho Chi Minh City University of Technology (HCMUT).
 
-#Title: Computing the Robust Indices of Quasiconvex Functions
+Contact: Prof. Phan Thanh An <thanhan@hcmut.edu.vn>
+
+#Title: Finding the robust index of the quasiconvex function f_8 on D_8
+"""
 
 from Algorithm_1 import *
 from Algorithm_2 import *
@@ -64,7 +65,7 @@ for i in range(len(partial_D_m)):
         zt = u[2] + t*(v[2]-u[2])/uv
         g = f.subs([(x,xt),(y,yt),(z,zt)])
 
-        s_g = Algorithm_1(g,t,0,uv)
+        s_g = algorithm_1(g,t,0,uv)
         S_m = S_m+[s_g]
         
         ax.plot([u[0], v[0]], [u[1], v[1]], [u[2], v[2]], c='b',linewidth=0.5)
