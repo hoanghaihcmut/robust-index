@@ -17,7 +17,7 @@ of quasiconvex functions on a closed interval [a, b], as presented in:
 Source code and numerical examples are available at:
     https://github.com/hoanghaihcmut/robust-index
 
-Title: Computing the Robustness Indices of Quasiconvex Functions
+Title: Algorithm 1
 """
 
 from sympy import (
