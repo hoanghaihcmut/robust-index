@@ -1,5 +1,3 @@
----
-
 # On the Robustness of Quasiconvex Functions
 
 **N.N. Hai**<sup>2,3</sup>, **P.T. An**<sup>1,3\*</sup> ([ORCID: 0000-0002-1903-3510](https://orcid.org/0000-0002-1903-3510)), **N.H. Hai**<sup>1,3</sup>
