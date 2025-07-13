@@ -117,7 +117,7 @@ if __name__ == "__main__":
     b = 1
     f = (1/3) * x**3 - 2 * x**2 + 4 * x
 
-    sf = algorithm_1(f, x, a, b)
+    sf = algorithm_2(f, x, a, b)
 
     print(f"f(x) = {f}, D = [{a}, {b}]")
     print(f"Robustness index (sf) = {sf}")
