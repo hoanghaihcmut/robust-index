@@ -1,80 +1,123 @@
 """
-This code is copyrighted by Institute of Mathematical and Computational Sciences - IMACS, 
-	Ho Chi Minh City University of Technology (HCMUT).  
-Contact: Prof. Phan Thanh An thanhan@hcmut.edu.vn
+Copyright © Institute of Mathematical and Computational Sciences (IMACS),
+Ho Chi Minh City University of Technology (HCMUT).
+
+Contact: Prof. Phan Thanh An <thanhan@hcmut.edu.vn>
+
+This module implements Algorithm 1 for computing the robustness index
+of quasiconvex functions on a closed interval [a, b], as presented in:
+
+    N.N. Hai, P.T. An*, N.H. Hai
+    "On the Robustness of Quasiconvex Functions"
+    Journal of Computational and Applied Mathematics, 2025.
+    DOI: https://doi.org/10.1016/j.cam.2025.116906
+
+*Corresponding author: P.T. An (thanhan@hcmut.edu.vn)
+
+Source code and numerical examples are available at:
+    https://github.com/hoanghaihcmut/robust-index
+
+Title: Computing the Robustness Indices of Quasiconvex Functions
 """
 
-#Title: Computing the Robust Indices of Quasiconvex Functions
+from sympy import (
+    symbols, solveset, diff, Interval, oo, EmptySet,
+    is_decreasing, is_increasing, is_convex
+)
 
-from sympy import symbols, solveset, diff, Interval, log, oo,EmptySet, is_decreasing, is_increasing, is_convex, is_monotonic
-import numpy as np
 
-#Checking for the quasiconvex function on [a,b]
-def is_quasiconvex(f,x,a,b):
-	x = symbols(str(x))
-	I = Interval(a,b)
+def is_quasiconvex(f, x, a, b):
+    """
+    Check whether function `f` is quasiconvex on the interval [a, b].
 
-	isQC = False
-	
-	df = diff(f,x)
+    Parameters:
+        f : sympy expression
+            The function to test.
+        x : sympy Symbol
+            The variable.
+        a, b : float
+            Interval endpoints.
 
-	if is_decreasing(f,I) or is_increasing(f,I):
-		isQC = True
-	else:
-		X = list(solveset(df,x,domain=I))
-		x_min=X[0]
-		for i in range(1,len(X)):
-			if f.subs(x,X[i])<f.subs(x,x_min):
-				x_min=X[i]
+    Returns:
+        bool
+            True if f is quasiconvex on [a, b], False otherwise.
+    """
+    I = Interval(a, b)
+    df = diff(f, x)
 
-		Ia = Interval(I.start, x_min)
-		Ib = Interval(x_min, I.end)
+    if is_decreasing(f, I) or is_increasing(f, I):
+        return True
 
-		if is_decreasing(f,Ia) and is_increasing(f,Ib):
-			isQC = True
-	return isQC
+    critical_points = list(solveset(df, x, domain=I))
+    if not critical_points:
+        return False
 
-#Algorithm_1: Finding the robust index of quasiconvex functions on [a,b]
-def Algorithm_1(f,x,a,b):
-    x = symbols(str(x))
+    x_min = min(critical_points, key=lambda t: f.subs(x, t))
+    I_left = Interval(I.start, x_min)
+    I_right = Interval(x_min, I.end)
 
-    I = Interval(a,b)
+    return is_decreasing(f, I_left) and is_increasing(f, I_right)
+
+
+def algorithm_1(f, x, a, b):
+    """
+    Compute the robustness index of a quasiconvex function on [a, b]
+    using Algorithm 1 from the paper.
+
+    Parameters:
+        f : sympy expression
+            The quasiconvex function.
+        x : sympy Symbol
+            The variable.
+        a, b : float
+            Interval endpoints.
+
+    Returns:
+        float
+            The robustness index, or -∞ if the function is not robust.
+    """
+    I = Interval(a, b)
     sf = -oo
-    if is_convex(f,x,domain=I):
-        sf = oo
-    else:
-	    df = f.diff()
-	    dff = df.diff()
-	    sol_dff = solveset(dff < 0, x, domain=Interval.open(a, b))
 
-	    S=[]
-	    sol_df_1 = solveset(df > 0, x, domain=sol_dff)
-	    if sol_df_1!=EmptySet:
-	    	S=S+[df.subs(x, sol_df_1.sup)]
-	    sol_df_2 = solveset(-df > 0, x, domain=sol_dff)
-	    if sol_df_2!=EmptySet:
-	    	S=S+[-df.subs(x, sol_df_2.inf)]
+    if is_convex(f, x, domain=I):
+        return oo
 
-	    sf_diamond = min(S)
-	    if sf_diamond==0:
-	    	sf=-oo
-	    else:
-	    	sf = sf_diamond
-	    	for t in list(solveset(dff,x,domain=Interval.open(a,b))):
-		    	df_t = df.subs(df,t)
-		    	if is_quasiconvex(f-df_t*x,x,a,b)==False:
-		    		sf = min(sf,abs(df_t))
+    df = diff(f, x)
+    dff = diff(df, x)
+    sol_dff_neg = solveset(dff < 0, x, domain=Interval.open(a, b))
+
+    candidates = []
+    sol_df_pos = solveset(df > 0, x, domain=sol_dff_neg)
+    if sol_df_pos != EmptySet:
+        candidates.append(df.subs(x, sol_df_pos.sup))
+
+    sol_df_neg = solveset(-df > 0, x, domain=sol_dff_neg)
+    if sol_df_neg != EmptySet:
+        candidates.append(-df.subs(x, sol_df_neg.inf))
+
+    if not candidates:
+        return -oo
+
+    sf_diamond = min(candidates)
+    if sf_diamond == 0:
+        return -oo
+
+    sf = sf_diamond
+    for t in solveset(dff, x, domain=Interval.open(a, b)):
+        df_t = df.subs(x, t)
+        if not is_quasiconvex(f - df_t * x, x, a, b):
+            sf = min(sf, abs(df_t))
+
     return sf
 
-#Examples
+
 if __name__ == "__main__":
-	x = symbols('x')
+    x = symbols('x')
+    a = 0
+    b = 1
+    f = (1/3) * x**3 - 2 * x**2 + 4 * x
 
-	a=0
-	b=1
-	f = 1/3*x**3-2*x**2+4*x
+    sf = algorithm_1(f, x, a, b)
 
-	sf = Algorithm_1(f,x,a,b)
-
-	print('f(x) = '+str(f)+', D = ['+str(a)+','+str(b)+']')
-	print('sf = '+str(sf))
+    print(f"f(x) = {f}, D = [{a}, {b}]")
+    print(f"Robustness index (sf) = {sf}")
