@@ -1,10 +1,11 @@
 """
-This code is copyrighted by Institute of Mathematical and Computational Sciences - IMACS, 
-	Ho Chi Minh City University of Technology (HCMUT).  
-Contact: Prof. Phan Thanh An thanhan@hcmut.edu.vn
-"""
+Copyright © Institute of Mathematical and Computational Sciences (IMACS),
+Ho Chi Minh City University of Technology (HCMUT).
 
-#Title: Computing the Robust Indices of Quasiconvex Functions
+Contact: Prof. Phan Thanh An <thanhan@hcmut.edu.vn>
+
+#Title: Finding the robust index of the quasiconvex function f_7 on D_7
+"""
 
 from Algorithm_1 import *
 from Algorithm_2 import *
