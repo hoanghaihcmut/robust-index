@@ -4,7 +4,7 @@ Ho Chi Minh City University of Technology (HCMUT).
 
 Contact: Prof. Phan Thanh An <thanhan@hcmut.edu.vn>
 
-This module implements Algorithm 2 for computing the robustness index
+This module implements Algorithm 1 for computing the robustness index
 of quasiconvex functions on a closed interval [a, b], as presented in:
 
     N.N. Hai, P.T. An*, N.H. Hai
@@ -17,7 +17,7 @@ of quasiconvex functions on a closed interval [a, b], as presented in:
 Source code and numerical examples are available at:
     https://github.com/hoanghaihcmut/robust-index
 
-Title: Computing the Robustness Indices of Quasiconvex Functions
+Title: Algorithm 2
 """
 
 from sympy import (
